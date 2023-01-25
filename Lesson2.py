@@ -83,3 +83,40 @@ print(f'последнии данные: {num}')
 товара: название, цена, количество, единица измерения). Структуру нужно
 сформировать программно, т.е. запрашивать все данные у пользователя.
 """
+exit_ = str()
+string_a = []
+string_b = []
+string_c = []
+string_d = []
+my_tupl = ''
+table_ = ('Название', 'Цена', 'Кол-во', 'ед.изм')
+i = 0
+while True:
+    a = 0
+    if not (exit_ == 'stop' or exit_ == 'info'):
+        key1 = input('Введите название товара:')
+        key2 = float(input('Введите цена товара:'))
+        key3 = int(input('Введите количество товара:'))
+        key4 = input('Введите единицу измерения количества:')
+        exit_ = str(input('Если желаете прекратить ввод и отобразить аналитику '
+                          'данных введите слово'
+                          ' "stop", если нужна информация о товарах введите'
+                          ' "info" '))
+        string_a.insert(i, key1)
+        string_b.insert(i, key2)
+        string_c.insert(i, key3)
+        string_d.insert(i, key4)
+        my_dir = {table_[0]: string_a, table_[1]: string_b, table_[2]: string_c,
+                  table_[3]: string_d}
+        i += 1
+        my_tupl = (f' {my_tupl} \n {i} {table_[0]}: {key1},'
+                        f' {table_[1]}: {key2}, {table_[2]}: {key3},'
+                        f'{table_[3]}: {key3}')
+    elif exit_ == 'info':
+        print(my_tupl)
+        break
+    elif exit_ == 'stop':
+        print('Аналитика:')
+        for key, value in my_dir.items():
+            print(f' {key}: {value}')
+        break
