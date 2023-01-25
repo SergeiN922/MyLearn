@@ -20,7 +20,7 @@ len_ = len(items)
 i = 0
 items_new = []
 while i < len_:
-    pair_el = items[(0+i):(2+i)]
+    pair_el = items[(0 + i):(2 + i)]
     pair_el.reverse()
     items_new = items_new + pair_el
     i += 2
@@ -32,7 +32,8 @@ print(list(items_new))
 """
 digit = int(input('Введите номер месяца:'))
 list_month = ['Зима', 'Весна', 'Лето', 'Осень']
-dict_ = {list_month[0]: [1,2,12], list_month[1]: [3,4,5], list_month[2]: [6,7,8]}
+dict_ = {list_month[0]: [1, 2, 12], list_month[1]: [3, 4, 5],
+         list_month[2]: [6, 7, 8]}
 if digit in dict_.get(list_month[0]):
     print(list_month[0])
 elif digit in dict_.get(list_month[1]):
@@ -48,26 +49,26 @@ else:
 первые 10 букв в слове.
 """
 letter = str(input('Введите предложение:'))
-list_let= letter.split(' ')
+list_let = letter.split(' ')
 length = len(list_let)
-i =0
+i = 0
 while i < length:
-   print(f'строка №{i+1}: {list_let[i]:.10}')
-   i += 1
+    print(f'строка №{i + 1}: {list_let[i]:.10}')
+    i += 1
 """
 5. Реализовать структуру «Рейтинг», представляющую собой не возрастающий набор 
 натуральных чисел. У пользователя необходимо запрашивать новый элемент 
 рейтинга. Если в рейтинге существуют элементы с одинаковыми
 значениями, то новый элемент с тем же значением должен разместиться после них.
 """
-num = [2,7,5,4,3,8,7,4,5]
+num = [2, 7, 5, 4, 3, 8, 7, 4, 5]
 print(type(num))
 list_ = list(set(num))
 print(list_)
 print(type(list_[1]))
 el = int(input('Введите число(прерывание опреации 999):'))
 while el != 999:
-    if not el in list_:
+    if el not in list_:
         num.append(el)
         print(num)
     else:
