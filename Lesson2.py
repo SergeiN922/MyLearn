@@ -30,6 +30,17 @@ print(list(items_new))
 времени года относится месяц (зима, весна, лето, осень).
 Напишите решения через list и через dict.
 """
+digit = int(input('Введите номер месяца:'))
+list_month = ['Зима', 'Весна', 'Лето', 'Осень']
+dict_ = {list_month[0]: [1,2,12], list_month[1]: [3,4,5], list_month[2]: [6,7,8]}
+if digit in dict_.get(list_month[0]):
+    print(list_month[0])
+elif digit in dict_.get(list_month[1]):
+    print(list_month[1])
+elif digit in dict_.get(list_month[2]):
+    print(list_month[2])
+else:
+    print(list_month[3])
 """
 4. Пользователь вводит строку из нескольких слов, разделённых пробелами.
 Вывести каждое слово с новой строки. 
