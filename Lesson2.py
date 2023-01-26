@@ -92,7 +92,7 @@ my_tupl = ''
 table_ = ('Название', 'Цена', 'Кол-во', 'ед.изм')
 i = 0
 while True:
-    a = 0
+    # a = 0
     if not (exit_ == 'stop' or exit_ == 'info'):
         key1 = input('Введите название товара:')
         key2 = float(input('Введите цена товара:'))
@@ -111,7 +111,7 @@ while True:
         i += 1
         my_tupl = (f' {my_tupl} \n {i} {table_[0]}: {key1},'
                         f' {table_[1]}: {key2}, {table_[2]}: {key3},'
-                        f'{table_[3]}: {key3}')
+                        f'{table_[3]}: {key4}')
     elif exit_ == 'info':
         print(my_tupl)
         break
