@@ -6,9 +6,12 @@
 num_1 = int(input("Введите первое число: "))
 num_2 = int(input("Введите второе число: "))
 
-def split_(a, b):
-    c = a / b if b != 0 else "На ноль делить нельзя!"
+
+def split_(x, y):
+    c = x / y if y != 0 else "На ноль делить нельзя!"
     print(c)
+
+
 split_(num_1, num_2)
 
 """
@@ -17,17 +20,21 @@ split_(num_1, num_2)
 Функция должна принимать параметры как именованные аргументы. Реализовать 
 вывод данных о пользователе одной строкой.
 """
+
+
 def data(name_, surname_, year_, city_, email_, phon_number):
     return print(f'Данные о пользователе : имя:{name_}, фамилия:{surname_},'
                  f' год рождения:{year_}, город проживания:{city_},'
                  f' email:{email_}, телефон:{phon_number} ')
 
-data(email_ = input("Email:"),
-     city_ = input("Город проживания:"),
-     name_ = input("Имя:"),
-     surname_ = input("Фамилия:"),
-     year_ = input("Год рождения:"),
-     phon_number = input("телефон:"))
+
+data(email_=input("Email:"),
+     city_=input("Город проживания:"),
+     name_=input("Имя:"),
+     surname_=input("Фамилия:"),
+     year_=input("Год рождения:"),
+     phon_number=input("телефон:"))
+
 """
 3. Реализовать функцию my_func(), которая принимает три позиционных аргумента, 
 и возвращает сумму наибольших двух аргументов.
@@ -37,12 +44,15 @@ num_1 = int(input("Введите первое число: "))
 num_2 = int(input("Введите второе число: "))
 num_3 = int(input("Введите второе число: "))
 
-def my_func(a, b, c):
-    list_ = [a, b, c]
+
+def my_func(x, y, z):
+    list_ = [x, y, z]
     list_.sort()
     sum_ = list_[-1] + list_[1]
     return sum_
-print(my_func(num_1, num_2, num_3))
+
+
+print(f'Сумма наибольших двух аргументов: {my_func(num_1, num_2, num_3)}')
 
 """
 4. Программа принимает действительное положительное число x и целое 
@@ -50,7 +60,24 @@ print(my_func(num_1, num_2, num_3))
 Задание необходимо реализовать в виде функции my_func(x, y). При решении 
 задания необходимо обойтись без встроенной функции возведения числа в степень.
 """
+print("Возведение числа x в степень y")
+a = abs(round(float(input("Введите действительное положительное число x: "))))
+b = round(float(input("Введите целое отрицательное число y: ")))
 
+
+def my_func(x, y):
+    if b < 0:
+        c = 1
+        y = abs(y)
+        for i in range(1, (y + 1)):
+            c = c * x
+            # print(c)
+            return print(1 / c)
+    else:
+        return print("Вы ввели некорректное второе число!")
+
+
+my_func(a, b)
 """
 Подсказка: попробуйте решить задачу двумя способами. Первый — возведение в 
 степень с помощью оператора *. Второй — более сложная реализация без оператора
@@ -64,8 +91,48 @@ print(my_func(num_1, num_2, num_3))
 специальный символ, выполнение программы завершается. Если специальный символ 
 введен после нескольких чисел, то вначале нужно добавить сумму этих чисел к 
 полученной ранее сумме и после этого завершить программу.
-2. Реализовать функцию int_func(), принимающую слово из маленьких латинских букв
-и возвращающую его же, но с прописной первой буквой. Например, 
+"""
+
+
+def str_to_list_nums(line):
+    """функция конвертирует строку в число"""
+    line = line.strip()
+    # если в строке только цифры
+    if line.isdigit():
+        return list(line)
+
+
+def sum_nums(list_, c=0):
+    length_nums = len(list_)
+    # print(length_nums)
+    # print(c)
+    for i in range(length_nums):
+        c = c + int(list_[i])
+    # print(f'сумма: {c}\n')
+    return c
+
+
+sums_ = 0
+
+while True:
+    inpt = input('Ожидается ввод числа или Enter:')
+    n = str_to_list_nums(inpt)
+    if inpt == '':
+        continue
+    elif inpt == '@':
+        print('Finish!')
+        break
+    elif sums_ != 0:
+        print(f'сумма: {sum_nums(n, c=sums_)}')
+        sums_ += sums_
+        continue
+    sums_ = sum_nums(n)
+    # print(type(n))
+    print(f'сумма: {sum_nums(n)}')
+
+"""
+2. Реализовать функцию int_func(), принимающую слово из маленьких латинских
+букв и возвращающую его же, но с прописной первой буквой. Например, 
 print(int_func(‘text’)) -> Text.
 
 Продолжить работу над заданием. В программу должна попадать строка из слов, 
