@@ -3,14 +3,15 @@
 выполняющую их деление. Числа запрашивать у пользователя, предусмотреть
 обработку ситуации деления на ноль.
 """
-num_1 = int(input("Введите первое число: "))
-num_2 = int(input("Введите второе число: "))
 
 
 def split_(x, y):
     c = x / y if y != 0 else "На ноль делить нельзя!"
-    print(c)
+    print(round(c,2))
 
+
+num_1 = int(input("Введите первое число: "))
+num_2 = int(input("Введите второе число: "))
 
 split_(num_1, num_2)
 
@@ -40,10 +41,6 @@ data(email_=input("Email:"),
 и возвращает сумму наибольших двух аргументов.
 """
 
-num_1 = int(input("Введите первое число: "))
-num_2 = int(input("Введите второе число: "))
-num_3 = int(input("Введите второе число: "))
-
 
 def my_func(x, y, z):
     list_ = [x, y, z]
@@ -51,6 +48,10 @@ def my_func(x, y, z):
     sum_ = list_[-1] + list_[1]
     return sum_
 
+
+num_1 = int(input("Введите первое число: "))
+num_2 = int(input("Введите второе число: "))
+num_3 = int(input("Введите второе число: "))
 
 print(f'Сумма наибольших двух аргументов: {my_func(num_1, num_2, num_3)}')
 
@@ -60,6 +61,8 @@ print(f'Сумма наибольших двух аргументов: {my_func(
 Задание необходимо реализовать в виде функции my_func(x, y). При решении 
 задания необходимо обойтись без встроенной функции возведения числа в степень.
 """
+
+
 print("Возведение числа x в степень y")
 a = abs(round(float(input("Введите действительное положительное число x: "))))
 b = round(float(input("Введите целое отрицательное число y: ")))
@@ -78,6 +81,7 @@ def my_func(x, y):
 
 
 my_func(a, b)
+
 """
 Подсказка: попробуйте решить задачу двумя способами. Первый — возведение в 
 степень с помощью оператора *. Второй — более сложная реализация без оператора
@@ -95,9 +99,8 @@ my_func(a, b)
 
 
 def str_to_list_nums(line):
-    """функция конвертирует строку в число"""
+    # print(line)
     line = line.strip()
-    # если в строке только цифры
     if line.isdigit():
         return list(line)
 
@@ -115,11 +118,13 @@ def sum_nums(list_, c=0):
 sums_ = 0
 
 while True:
-    inpt = input("Ожидается ввод числа или Enter:")
-    n = str_to_list_nums(inpt)
-    if inpt == '':
+    input_ = input("Ожидается ввод числа или Enter:")
+    # print(type(input_))
+    n = str_to_list_nums(input_.replace(' ', ''))
+    #print(n)
+    if input_ == '':
         continue
-    elif inpt == '@':
+    elif input_ == '@':
         print('Finish!')
         break
     elif sums_ != 0:
@@ -127,7 +132,6 @@ while True:
         sums_ += sums_
         continue
     sums_ = sum_nums(n)
-    # print(type(n))
     print(f'сумма: {sum_nums(n)}')
 
 """
