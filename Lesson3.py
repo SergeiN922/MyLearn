@@ -115,7 +115,7 @@ def sum_nums(list_, c=0):
 sums_ = 0
 
 while True:
-    inpt = input('Ожидается ввод числа или Enter:')
+    inpt = input("Ожидается ввод числа или Enter:")
     n = str_to_list_nums(inpt)
     if inpt == '':
         continue
