@@ -7,7 +7,8 @@
 
 def split_(x, y):
     c = x / y if y != 0 else "На ноль делить нельзя!"
-    print(round(c,2))
+    print(c)
+    return
 
 
 num_1 = int(input("Введите первое число: "))
@@ -74,7 +75,6 @@ def my_func(x, y):
         y = abs(y)
         for i in range(1, (y + 1)):
             c = c * x
-            # print(c)
             return print(1 / c)
     else:
         return print("Вы ввели некорректное второе число!")
@@ -99,7 +99,6 @@ my_func(a, b)
 
 
 def str_to_list_nums(line):
-    # print(line)
     line = line.strip()
     if line.isdigit():
         return list(line)
@@ -107,11 +106,8 @@ def str_to_list_nums(line):
 
 def sum_nums(list_, c=0):
     length_nums = len(list_)
-    # print(length_nums)
-    # print(c)
     for i in range(length_nums):
         c = c + int(list_[i])
-    # print(f'сумма: {c}\n')
     return c
 
 
@@ -119,9 +115,7 @@ sums_ = 0
 
 while True:
     input_ = input("Ожидается ввод числа или Enter:")
-    # print(type(input_))
     n = str_to_list_nums(input_.replace(' ', ''))
-    #print(n)
     if input_ == '':
         continue
     elif input_ == '@':
