@@ -11,10 +11,11 @@ def split_(x, y):
     return
 
 
-num_1 = int(input("Введите первое число: "))
-num_2 = int(input("Введите второе число: "))
-
-split_(num_1, num_2)
+num_1, num_2 = input("Введите первое число: "), input("Введите второе число: ")
+if num_1.isdigit() and num_2.isdigit() is True:
+    split_(int(num_1), int(num_2))
+else:
+    print("Какое-то из значений введено не верно!")
 
 """
 2. Реализовать функцию, принимающую несколько параметров, описывающих данные
@@ -73,14 +74,15 @@ def my_func(x, y):
     if b < 0:
         c = 1
         y = abs(y)
-        for i in range(1, (y + 1)):
-            c = c * x
-            return print(1 / c)
+        for i in range(y):
+            c *= x
+        return print(1 / c)
     else:
         return print("Вы ввели некорректное второе число!")
 
 
 my_func(a, b)
+
 
 """
 Подсказка: попробуйте решить задачу двумя способами. Первый — возведение в 
@@ -99,33 +101,43 @@ my_func(a, b)
 
 
 def str_to_list_nums(line):
-    line = line.strip()
-    if line.isdigit():
-        return list(line)
+    def rtu(ds):
+        ds = ds.replace(" ", "")
+        if ds.isdigit():
+            return True
+        else:
+            return False
+
+    while rtu(line):
+        line = list(line.split(" "))
+        return line
 
 
 def sum_nums(list_, c=0):
-    length_nums = len(list_)
-    for i in range(length_nums):
-        c = c + int(list_[i])
-    return c
+    if list_ is not None:
+        length_nums = len(list_)
+        for i in range(length_nums):
+            c = c + int(list_[i])
+        return c
+    else:
+        return False
 
 
 sums_ = 0
 
 while True:
-    input_ = input("Ожидается ввод числа или Enter:")
-    n = str_to_list_nums(input_.replace(' ', ''))
+    input_ = input("Ожидается ввод числа или Enter:").strip()
+    n = str_to_list_nums(input_)
     if input_ == '':
         continue
     elif input_ == '@':
         print('Finish!')
         break
     elif sums_ != 0:
-        print(f'сумма: {sum_nums(n, c=sums_)}')
-        sums_ += sums_
+        sums_ = sum_nums(n, c=sums_)
+        print(f'сумма: {sums_}')
         continue
-    sums_ = sum_nums(n)
+    sums_ = sum_nums(n) if sum_nums(n) is not False else print('Incorrect')
     print(f'сумма: {sum_nums(n)}')
 
 """
@@ -138,3 +150,12 @@ print(int_func(‘text’)) -> Text.
 Сделать вывод исходной строки, но каждое слово должно начинаться с заглавной 
 буквы. Необходимо использовать написанную ранее функцию int_func().
 """
+
+
+def int_func(strict):
+    strict = str.title(strict)
+    return strict
+
+
+print(int_func('text'))
+print(int_func(input('Введите предложение: ')))
