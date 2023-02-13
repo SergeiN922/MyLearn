@@ -17,7 +17,8 @@
 """
 
 start_list = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
-print([numb for el,numb in enumerate(start_list) if el > 0 and start_list[el]
+
+print([numb for el, numb in enumerate(start_list) if el > 0 and start_list[el]
        > start_list[el - 1]])
 
 """
@@ -37,6 +38,12 @@ print([el for el in range(20, 240) if el % 20 == 0 or el % 21 == 0])
 Результат: [23, 1, 3, 10, 4, 11]
 """
 
+start_list = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+
+new_list = [el for el in start_list if start_list.count(el) == 1]
+
+print(new_list)
+
 
 """
 5. Реализовать формирование списка, используя функцию range() и возможности 
@@ -45,6 +52,21 @@ print([el for el in range(20, 240) if el % 20 == 0 or el % 21 == 0])
 списка.
 Подсказка: использовать функцию reduce().
 """
+
+from functools import reduce
+
+
+def my_func(prev_el, el):
+    return prev_el * el
+
+
+my_list = [el for el in range(100, 1001) if el % 2 == 0]
+print(my_list)
+
+
+print(reduce(my_func, my_list))
+
+
 """
 6. Реализовать два небольших скрипта:
 а) итератор, генерирующий целые числа, начиная с указанного,
@@ -69,3 +91,21 @@ print([el for el in range(20, 240) if el % 20 == 0 or el % 21 == 0])
 Подсказка: факториал числа n — произведение чисел от 1 до n. Например, 
 факториал четырёх 4! = 1 * 2 * 3 * 4 = 24.
 """
+
+from itertools import count
+from math import factorial
+
+
+def fact():
+    for x in count(1):
+        yield factorial(x)
+
+
+n = 0
+
+for el in fact():
+    if n < 10:
+        print(el)
+        n += 1
+    else:
+        break
