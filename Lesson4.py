@@ -5,6 +5,12 @@
 конкретных значений необходимо запускать скрипт с параметрами.
 """
 
+from sys import argv
+
+script_name, production_per_hour, rate_per_hour, prize_in_rubles = argv
+result = int(production_per_hour) * int(rate_per_hour) + int(prize_in_rubles)
+
+print(f'заработная плата сотрудника составит - {result} руб.')
 
 """
 2. Представлен список чисел. Необходимо вывести элементы исходного списка, 
@@ -81,6 +87,31 @@ print(reduce(my_func, my_list))
 при котором повторение элементов списка будет прекращено.
 """
 
+# script <a>
+
+from itertools import count
+
+n = int(input('Введите начальное число: '))
+for el in count(n):
+    if el > 15:
+        break
+    else:
+        print(el)
+
+# script <b>
+
+from itertools import cycle
+
+
+list_ = [1, 10.7, None, "my_list", True, [1, 3]]
+
+n = 0
+for el in cycle(list):
+    if n > 15:
+        break
+    else:
+        print(el)
+        n += 1
 
 """
 7. Реализовать генератор с помощью функции с ключевым словом yield, создающим 
