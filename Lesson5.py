@@ -26,6 +26,19 @@ with open('text_new.txt', 'r', encoding='utf-8') as file:
 Иванов 23543.12
 Петров 13749.32
 """
+
+with open('task3.txt', "r", encoding='UTF-8') as f:
+    list_worker = []
+    salary = 0
+    for i, worker in enumerate(f.readlines()):
+        a = worker.split(" ")
+        i += 1
+        salary += float(a[1])
+        if float(a[1]) < 20000:
+            list_worker.append(a[0])
+    print(f'Сотрудники с доходом менее 20 тыс. : {list_worker}')
+    print(f'Cреднея величина дохода сотрудников: {salary / i}')
+
 """
 4. Создать (не программно) текстовый файл со следующим содержимым:
 One — 1
@@ -37,11 +50,36 @@ Four — 4
 При этом английские числительные должны заменяться на русские. Новый блок строк
 должен записываться в новый текстовый файл.
 """
+
+rus = {'One': 'Один', 'Two': 'Два', 'Three': 'Три', 'Four': 'Четыре'}
+new_file = []
+with open('Task4.txt', 'r', encoding='UTF-8') as f:
+    for i in f.readlines():
+        i = i.split(' ', 1)
+        new_file.append(rus[i[0]] + '  ' + i[1])
+    print(new_file)
+
+with open('Task4_new.txt', 'w', encoding='UTF-8') as f2:
+    f2.writelines(new_file)
+
 """
 5. Создать (программно) текстовый файл, записать в него программно набор чисел,
 разделённых пробелами. Программа должна подсчитывать сумму чисел в файле и 
 выводить её на экран.
 """
+
+
+def summary():
+    with open('Task5.txt', 'w+', encoding='UTF-8') as f:
+        line = input('Введите цифры через пробел:')
+        f.writelines(line)
+        my_numb = line.split()
+        sum_ = sum(map(int, my_numb))
+        f.writelines(f'\nСумма чисел: {sum_}')
+        print(f'Сумма чисел: {sum_}')
+
+
+summary()
 """
 6. Сформировать (не программно) текстовый файл. В нём каждая строка должна
 описывать учебный предмет и наличие лекционных, практических и лабораторных
@@ -56,6 +94,19 @@ Four — 4
 Пример словаря: {“Информатика”: 170, “Физика”: 40, “Физкультура”: 30}
 """
 
+import re
+
+report = {}
+with open('Task6.txt', 'r', encoding='UTF-8') as file:
+    text = file.read()
+    file.seek(0)
+    for row in file:
+        row_items = row.split(': ')
+        hours = re.findall(r"\d+", row_items[1])
+        report.update({row_items[0]: sum([int(i) for i in hours])})
+
+print(f"Исходный данные:\n{text}\n")
+print(f"Словарь:\n{report}")
 
 """
 7. Создать вручную и заполнить несколькими строками текстовый файл, в котором 
