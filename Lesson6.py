@@ -16,14 +16,13 @@ from time import sleep
 
 
 class TrafficLight:
-    color_ = ['Красный', 'Желтый', 'Зеленый']
-
+    __color = ['Красный', 'Желтый', 'Зеленый']
 
     def running(self):
         i = 0
         while i < 3:
             print(f'Режим светофора: \n\t '
-                  f'{TrafficLight.color_[i]}')
+                  f'{TrafficLight.__color[i]}')
             if i == 0:
                 sleep(7)
             elif i == 1:
@@ -33,8 +32,8 @@ class TrafficLight:
             i += 1
 
 
-TrafficLight = TrafficLight()
-TrafficLight.running()
+a = TrafficLight()
+a.running()
 
 """
 2. Реализовать класс Road (дорога).
@@ -48,23 +47,20 @@ TrafficLight.running()
 - проверить работу метода.
 Например: 20 м*5000 м*25 кг*5 см = 12500 т
 """
+
+
 class Road:
-    def __init__(self, _length, _width):
-        self._length = _length
-        self._width = _width
+    def __init__(self, length: int, width: int):
+        self._length = length
+        self._width = width
 
-    def mass(self):
-        return self._length * self._width
-
-
-class MassCount(Road):
-    def __init__(self, _length, _width, volume):
-        super().__init__(_length, _width)
-        self.volume = volume
+    def get_mass(self, mass_1m2: int, thickness: int) -> int:
+        mass = self._length * self._width * mass_1m2 * thickness // 1000
+        return mass
 
 
-r = MassCount(25, 10000, 125)
-print(r.mass())
+road = Road(5000, 20)
+assert road.get_mass(25, 5) == 12500
 
 """
 3. Реализовать базовый класс Worker (работник).
@@ -78,32 +74,29 @@ print(r.mass())
 Position, передать данные, проверить значения атрибутов, вызвать методы 
 экземпляров.
 """
-class Worker:
 
-    def __init__(self, name, surname, position, wage, bonus):
+
+class Worker:
+    def __init__(self, name: str, surname: str, position: str, wage: int,
+                 bonus: int):
         self.name = name
         self.surname = surname
         self.position = position
-        self._income = {"wage": wage, "bonus": bonus}
+        self._income = {'wage': wage, 'bonus': bonus}
 
 
 class Position(Worker):
-
-    def __init__(self, name, surname, position, wage, bonus):
-        super().__init__(name, surname, position, wage, bonus)
-
     def get_full_name(self):
-        return self.name + ' ' + self.surname
+        return f"{self.name} {self.surname}"
 
     def get_total_income(self):
-        return self._income.get('wage') + self._income.get('bonus')
-        # return f'{sum(self._income.values())}'
+        return sum(self._income.values())
 
 
-a = Position('Peter', 'The Great', 'Beekeeper', 100000, 25000)
-print(a.get_full_name())
-print(a.position)
-print(a.get_total_income())
+vasya = Position('Илья', 'Иванов', 'Айтишник', 100000, 20000)
+print(vasya.get_full_name())
+print(vasya.position)
+print(vasya.get_total_income())
 
 """
 4. Реализуйте базовый класс Car.
@@ -119,84 +112,108 @@ print(a.get_total_income())
 Создайте экземпляры классов, передайте значения атрибутов. Выполните доступ к 
 атрибутам, выведите результат. Вызовите методы и покажите результат
 """
+
+
 class Car:
-    # atributes
-    def __init__(self, speed, color, name, is_police):
-        self.speed = speed
+    def __init__(self, color: str, name: str, is_police: bool):
+        self.speed = 0
         self.color = color
         self.name = name
         self.is_police = is_police
 
-    # methods
-    def go(self):
-        return f'{self.name} is started'
+    def go(self, speed):
+        self.speed = speed
+        print(f'Разгоняемся до {speed} км/ч')
 
     def stop(self):
-        return f'{self.name} is stopped'
+        self.speed = 0
+        print('Останавливаемся')
 
-    def turn_right(self):
-        return f'{self.name} is turned right'
-
-    def turn_left(self):
-        return f'{self.name} is turned left'
+    def turn(self, direction: str):
+        if self.speed > 0:
+            print(f'Поворачиваем {direction}')
+        else:
+            print('Не можем повернуть - мы стоим на месте')
 
     def show_speed(self):
-        return f'Current speed {self.name} is {self.speed}'
+        print(f'Скорость {self.speed} км/ч')
 
 
 class TownCar(Car):
-    def __init__(self, speed, color, name, is_police):
-        super().__init__(speed, color, name, is_police)
+    def __init__(self, color: str, name: str):
+        self.speed = 0
+        self.color = color
+        self.name = name
+        self.is_police = False
 
     def show_speed(self):
-        print(f'Current speed of town car {self.name} is {self.speed}')
-
-        if self.speed > 40:
-            return f'Speed of {self.name} is higher than allow for town car'
+        if self.speed > 60:
+            print(f'Внимание! Превышение скорости {self.speed} км/ч')
         else:
-            return f'Speed of {self.name} is normal for town car'
+            print(f'Скорость {self.speed} км/ч')
+
 
 class SportCar(Car):
-    def __init__(self, speed, color, name, is_police):
-        super().__init__(speed, color, name, is_police)
+    def __init__(self, color: str, name: str):
+        self.speed = 0
+        self.color = color
+        self.name = name
+        self.is_police = False
 
 
 class WorkCar(Car):
-    def __init__(self, speed, color, name, is_police):
-        super().__init__(speed, color, name, is_police)
+    def __init__(self, color: str, name: str):
+        self.speed = 0
+        self.color = color
+        self.name = name
+        self.is_police = False
 
     def show_speed(self):
-        print(f'Current speed of work car {self.name} is {self.speed}')
-
-        if self.speed > 60:
-            return f'Speed of {self.name} is higher than allow for work car'
+        if self.speed > 40:
+            print(f'Внимание! Превышение скорости {self.speed} км/ч')
+        else:
+            print(f'Скорость {self.speed} км/ч')
 
 
 class PoliceCar(Car):
-    def __init__(self, speed, color, name, is_police):
-        super().__init__(speed, color, name, is_police)
-
-    def police(self):
-        if self.is_police:
-            return f'{self.name} is from police department'
-        else:
-            return f'{self.name} is not from police department'
+    def __init__(self, color: str, name: str):
+        self.speed = 0
+        self.color = color
+        self.name = name
+        self.is_police = True
 
 
-audi = SportCar(100, 'Red', 'Audi', False)
-oka = TownCar(30, 'White', 'Oka', False)
-lada = WorkCar(70, 'Rose', 'Lada', True)
-ford = PoliceCar(110, 'Blue',  'Ford', True)
-print(lada.turn_left())
-print(f'When {oka.turn_right()}, then {audi.stop()}')
-print(f'{lada.go()} with speed exactly {lada.show_speed()}')
-print(f'{lada.name} is {lada.color}')
-print(f'Is {audi.name} a police car? {audi.is_police}')
-print(f'Is {lada.name}  a police car? {lada.is_police}')
-print(audi.show_speed())
-print(oka.show_speed())
-print(ford.police())
-print(ford.show_speed())
+def test_drive(auto):
+    print(f"Тест-драйв {'полицейского' if auto.is_police else 'гражданского'} "
+          f"автомобиля {auto.name}, цвет {auto.color}")
+    auto.go(40)
+    auto.show_speed()
+    auto.turn('направо')
+    auto.stop()
+    auto.show_speed()
+    auto.turn('налево')
+    auto.go(60)
+    auto.show_speed()
+    auto.go(120)
+    auto.show_speed()
+    auto.stop()
+    print("Тест-драйв окончен", end="\n\n")
+
+
+car = Car('белый', 'Kia Optima', False)
+test_drive(car)
+
+polo = TownCar('коричневый', 'Volkswagen Polo')
+test_drive(polo)
+
+veyron = SportCar('желтый', 'Bugatti Veyron')
+test_drive(veyron)
+
+largus = WorkCar('красный', 'Lada Largus')
+test_drive(largus)
+
+mondeo = PoliceCar('синий', 'Ford Mondeo')
+test_drive(mondeo)
 
 """
 5. Реализовать класс Stationery (канцелярская принадлежность).
@@ -208,41 +225,39 @@ print(ford.show_speed())
 - создать экземпляры классов и проверить, что выведет описанный метод для 
 каждого экземпляра.
 """
-class Stationary:
+
+
+class Stationery:
     def __init__(self, title):
         self.title = title
 
     def draw(self):
-        return f'Запуск отрисовки {self.title}'
+        print(f"Запуск отрисовки {self.title}")
 
 
-class Pen(Stationary):
-    def __init__(self, title):
-        super().__init__(title)
-
+class Pen(Stationery):
     def draw(self):
-        return f'Вы взяли {self.title}. Запуск отрисовки ручкой'
+        print(f"Запуск отрисовки ручкой {self.title}")
 
 
-class Pencil(Stationary):
-    def __init__(self, title):
-        super().__init__(title)
-
+class Pencil(Stationery):
     def draw(self):
-        return f'Вы взяли {self.title}. Запуск отрисовки карандашом'
+        print(f"Запуск отрисовки карандашем {self.title}")
 
 
-class Handle(Stationary):
-    def __init__(self, title):
-        super().__init__(title)
-
+class Handle(Stationery):
     def draw(self):
-        return f'Вы взяли {self.title}. Запуск отрисовки маркером'
+        print(f"Запуск отрисовки маркером {self.title}")
 
 
-pen = Pen('Ручка')
-pencil = Pencil('Карандаш')
-handle = Handle('Маркер')
-print(pen.draw())
-print(pencil.draw())
-print(handle.draw())
+stationery = Stationery('Гусиное перо')
+stationery.draw()
+
+pen = Pen('Гелевая')
+pen.draw()
+
+pencil = Pencil('Учебный')
+pencil.draw()
+
+handle = Handle('Для белой доски')
+handle.draw()
