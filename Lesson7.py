@@ -62,26 +62,27 @@ print(matrix03)
 этом уроке знания: реализовать абстрактные классы для основных классов проекта,
 проверить на практике работу декоратора @property.
 """
+
 from abc import ABC, abstractmethod
 
 
-class Clothes(ABC):
-    def __init__(self, name: str):
-        self.name = name
-
-    @abstractmethod
-    def fabric_consumption(self):
-        pass
+class DivisionByZeroError(Exception):
+    def __init__(self, txt):
+        self.txt = txt
 
 
-class Coat(Clothes):
-    def __init__(self, name: str, size: int):
-        self.size = size
-        super().__init__(name)
+def smart_divider(a, b):
+    if b == 0:
+        raise DivisionByZeroError(f'{a} / {b} = На ноль делть нельзя!')
+    return a / b
 
-    @property
-    def fabric_consumption(self):
-        return round(self.size / 6.5 + 0.5, 2)
+
+try:
+    smart_divider(6, 0)
+except DivisionByZeroError as e:
+    print(e)
+
+print(f"45 / 5 = {smart_divider(45, 5)}")
 
 
 class Suit(Clothes):
