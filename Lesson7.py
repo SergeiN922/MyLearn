@@ -63,26 +63,27 @@ print(matrix03)
 проверить на практике работу декоратора @property.
 """
 
+
 from abc import ABC, abstractmethod
 
 
-class DivisionByZeroError(Exception):
-    def __init__(self, txt):
-        self.txt = txt
+class Clothes(ABC):
+    def __init__(self, name: str):
+        self.name = name
+
+    @abstractmethod
+    def fabric_consumption(self):
+        pass
 
 
-def smart_divider(a, b):
-    if b == 0:
-        raise DivisionByZeroError(f'{a} / {b} = На ноль делть нельзя!')
-    return a / b
+class Coat(Clothes):
+    def __init__(self, name: str, size: int):
+        self.size = size
+        super().__init__(name)
 
-
-try:
-    smart_divider(6, 0)
-except DivisionByZeroError as e:
-    print(e)
-
-print(f"45 / 5 = {smart_divider(45, 5)}")
+    @property
+    def fabric_consumption(self):
+        return round(self.size / 6.5 + 0.5, 2)
 
 
 class Suit(Clothes):
