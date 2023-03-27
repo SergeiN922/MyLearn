@@ -14,7 +14,7 @@ with open('text_new.txt', 'r', encoding='utf-8') as file:
     file.seek(0)
     for i, word in enumerate(file.readlines(), 1):
         len_str = len(word.split(" "))
-        print(f'кол-во слов в {i} сторке: {len_str}')
+        print(f'кол-во слов в {i} строке: {len_str}')
 
 """
 3. Создать текстовый файл (не программно). Построчно записать фамилии 
